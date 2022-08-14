@@ -46,6 +46,7 @@ void test1()
     p = myMalloc(10);
     p1 = myMalloc(11);
     p3 = myMalloc(-1);
+    myDelete(p3);
     myDelete(p1);
     for (int i = 0; i < (ALLOC_CNT + 1); i++)
     {
@@ -140,6 +141,9 @@ void* myMalloc(uint8_t cnt)
 */
 bool myDelete(void* chank)
 {
+    if (chank == NULL) {
+        return false;
+    }
     bool ret = false;
     for (int i = 0; i < ALLOC_CNT; i++) {
         if (chank == (void*)heap1kb[i]) {
