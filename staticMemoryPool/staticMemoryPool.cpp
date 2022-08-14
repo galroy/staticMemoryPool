@@ -54,13 +54,13 @@ void test1()
         if (p2[i] == NULL) {
             printf("error \n");
         }
-    }
+        }
+    }*/
 
 
 
 }
 
-void* myMalloc(size_t cnt)
 {
     void* ptr = NULL;
     if (0 == cnt || cnt > HEAP_1MB) {
