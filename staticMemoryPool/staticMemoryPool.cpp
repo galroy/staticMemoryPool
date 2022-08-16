@@ -24,37 +24,130 @@ void* myMalloc20KB();
 void* myMalloc1MB();
 bool myDelete(void* chank);
 
-//static uint8_t memPool[MEM_SIZE_100_MB];
+
 
 
 /////////test fun///////////////
 void test1();
+void test2();
+void test3();
+void test4();
 
 int main()
 {
 
 	test1();
+	test2();
+	test3();
+	test4();
+	
 }
 
 
 void test1()
 {
 	void* p = NULL;
-	void* p1 = NULL;
-	void* p2[ALLOC_CNT + 1] = { NULL };
-	void* p3 = NULL;
-	p = myMalloc(10);
-	p1 = myMalloc(11);
-	p3 = myMalloc(-1);
-	myDelete(p3);
-	myDelete(p1);
-	for (int i = 0; i < (ALLOC_CNT + 1); i++)
-	{
-		p2[i] = myMalloc(100);
-		if (p2[i] == NULL) {
-			printf("error \n");
+	p = myMalloc(HEAP_1KB);
+	if (p) {
+		printf("test1 part1 succeed\n");
+	}
+	else {
+		printf("test1 part1 fail\n");
+	}
+	if (myDelete(p) == true) {
+		printf("test1 part2 succeed\n");
+	}
+	else {
+		printf("test1 part2 fail\n");
+	}
+
+	p = myMalloc(HEAP_20KB);
+	if (p) {
+		printf("test1 part3 succeed\n");
+	}
+	else {
+		printf("test1 part3 fail\n");
+	}
+	if (myDelete(p) == true) {
+		printf("test1 part4 succeed\n");
+	}
+	else {
+		printf("test1 part4 fail\n");
+	}
+
+	p = myMalloc(HEAP_1MB);
+	if (p) {
+		printf("test1 part5 succeed\n");
+	}
+	else {
+		printf("test1 part5 fail\n");
+	}
+	if (myDelete(p) == true) {
+		printf("test1 part6 succeed\n");
+	}
+	else {
+		printf("test1 part6 fail\n");
+	}
+
+	p = myMalloc(HEAP_1MB+10);
+	if (p) {
+		printf("test1 part7 fail\n");
+		
+	}
+	else {
+		printf("test1 part7 succeed\n");
+	}
+	if (myDelete(p) == true) {
+		printf("test1 part8 fail\n");
+	}
+	else {
+		printf("test1 part8 succeed\n");
+	}
+	
+	
+}
+
+void test2()
+{
+	void* p = NULL;
+	p = myMalloc(11);
+	if (p != NULL) {
+		if (myDelete(p)) {
+			printf("test2 succeed\n");
+		}
+		else {
+			printf("test2 fail\n");
 		}
 	}
+	
+}
+
+void test3()
+{
+	void* p[ALLOC_CNT + 1] = { NULL };
+	for (int i = 0; i < (ALLOC_CNT + 1); i++)
+	{
+		p[i] = myMalloc(100);
+		if (p[i] == NULL) {
+			printf("test3 fail\n");
+		}
+	}
+}
+void test4()
+{
+	void* p = NULL;
+	p = myMalloc(-1);
+	if (p == NULL) {
+		printf("test4 succeed\n");
+	}
+	else {
+		printf("test4 fail\n");
+	}
+	if (p != NULL) {
+		printf("test4 part2 fail\n");
+		myDelete(p);
+	}
+	
 }
 
 
